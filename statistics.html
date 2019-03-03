@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Statitics</title>
+<script src="./moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+async function csvToJSON(csv){
+
+  var lines=csv.split("\n");
+
+  var result = [];
+
+  var headers=lines[0].split(",");
+
+  for(var i=1;i<lines.length-1;i++){
+
+	  var obj = {};
+	  var currentline=lines[i].split(",");
+
+	  for(var j=0;j<headers.length;j++){
+		  obj[headers[j]] = currentline[j];
+	  }
+
+	  result.push(obj);
+
+  }
+
+  //return result; //JavaScript object
+  return result;
+}
+var csvdata=[];var data=[];
+var labels=[];
+
+var myChart=null;
+function renderChart(time_limit) {
+     var local_data=[];
+     var local_labels=[];
+
+     var index=-1;
+     var nowObj=new Date();
+
+     var now = new Date(nowObj.getTime() - (3600000* time_limit));
+     //console.log((3600000* time_limit));
+     //console.log("now:"+now);
+     console.log(moment("final record:"+labels[data.length-1]).toDate());
+
+     for(var i=data.length-1;i>=0;i--){//console.log("i,"+i);
+        if(moment(labels[i]).toDate().getTime()-now<=0)
+            {index=i+1;
+            console.log("break:"+i);
+            break;}}
+    if(i==-1) index=0;
+
+    local_labels=labels.slice(index, data.length);
+    local_data=data.slice(index, data.length);
+    if(myChart!=null)
+    {
+        myChart.data.labels=local_labels;
+        myChart.data.datasets[0].data=local_data;
+        myChart.options.title.text='Eye Blinks in the last '+time_limit+" Hour(s)";
+        myChart.update();
+        return;
+    }
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: local_labels,
+            datasets: [{
+                label: 'Number of Eye Blinks',
+                data: local_data,
+                'ticks':{"source":"2019-02-02 17:43:27.828029"},
+                borderColor: "#80b6f4",
+            pointBorderColor: "#80b6f4",
+            pointBackgroundColor: "#80b6f4",
+            pointHoverBackgroundColor: "#80b6f4",
+            pointHoverBorderColor: "#80b6f4",
+
+            }]
+        },
+        options: {
+
+            responsive: true,
+        title:{
+            display:true,
+            text: 'Eye Blinks in the last '+time_limit+" Hour(s)",
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+
+
+                time: {
+                    displayFormats: {
+                        quarter: 'MMM YYYY'
+                    }
+                }
+            }]
+        }
+    }
+    });
+
+}
+
+
+    window.onload=async function(){
+      const fs = require('fs');
+      await fs.readFile('engine/stats.csv', 'utf8', async function(err, contents) {
+      csvdata=await csvToJSON(contents);
+      console.log(csvdata);
+
+
+      for (var i = 0; i < csvdata.length; i++) {
+          data.push(csvdata[i].count);
+          labels.push(csvdata[i].time);
+
+      }
+      });
+
+        renderChart(0.5);
+    };
+
+
+</script>
+<style type="text/css">
+    .myButton {
+    -moz-box-shadow: 0px 0px 0px 0px #b5b5b5;
+    -webkit-box-shadow: 0px 0px 0px 0px #b5b5b5;
+    box-shadow: 0px 0px 0px 0px #b5b5b5;
+    background-color:#7ce699;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ffffff;
+    display:inline-block;
+    cursor:pointer;
+    color:#000000;
+    font-family:Courier New;
+    font-size:15px;
+    padding:13px 40px;
+    text-decoration:none;
+}
+.myButton:hover {
+    background-color:#3ccefa;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+body{
+        background: #93cede; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #93cede 0%, #75bdd1 41%, #84edb0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #93cede 0%,#75bdd1 41%,#84edb0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #93cede 0%,#75bdd1 41%,#84edb0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#84edb0',GradientType=1 );
+    }
+    .content {
+    padding: 30px;
+  background: white;
+  width: 70%;
+  max-width: 900px;
+  min-width: 500px;
+  min-height: 500px;
+
+  text-align: center;
+    font-family: Helvetica, Arial, Sans-Serif;
+    overflow: auto;
+    }
+
+    .center{
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+        .shadow{
+
+      -webkit-box-shadow: 0 8px 6px -6px black;
+      -moz-box-shadow: 0 8px 6px -6px black;
+       box-shadow: 0 8px 6px -6px black;
+        }
+</style>
+<script>
+
+
+</script>
+<style type="text/css">
+        .container {
+        width: 90%;
+        height: 90%;
+    }
+</style>
+</head>
+<body>
+    <div class="content shadow center">
+    <a onclick="renderChart(0.5)" class="myButton">Last 30 Min</a>
+    <a onclick="renderChart(1)" class="myButton">Last 1 Hour</a>
+    <a onclick="renderChart(2)" class="myButton">Last 2 Hours</a>
+    <a onclick="renderChart(6)" class="myButton">Last 6 Hours</a>
+
+    <div class="container" style="margin: auto;margin: 10px">
+        <canvas id="myChart"></canvas>
+    </div>
+     <a href='./settings.html' class="myButton">Go Back</a>
+    </div>
+
+</body>
+</html>

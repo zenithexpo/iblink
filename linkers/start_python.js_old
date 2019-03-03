@@ -1,0 +1,17 @@
+
+function start_python_func(data) {
+  var path = require("path")
+  var python = require("python-shell")
+
+  var status=data.status;
+  var interval=data.Interval;
+  var twenty=data.twenty;
+  var notification=data.notification;
+
+  var options = {
+    scriptPath : path.join(__dirname, '/engine/'),
+    args : [status,interval,twenty,notification]
+  }
+
+  var instance = new python('update.py', options);
+}

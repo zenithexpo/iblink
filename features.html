@@ -1,0 +1,157 @@
+  <style>
+      @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+html,
+body {
+  background: #93cede; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #93cede 0%, #75bdd1 41%, #84edb0 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #93cede 0%,#75bdd1 41%,#84edb0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #93cede 0%,#75bdd1 41%,#84edb0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  font-size: 14px;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#84edb0',GradientType=1 );
+  text-align: center;
+  font-family: 'Raleway', Helvetica, sans-serif;
+  min-width: 320px;
+}
+
+
+header {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 20px;
+}
+
+#form-outer {
+  background-color: rgb(256, 256, 256);
+  margin: 0 auto;
+  border-radius: 4px;
+  width: 75%;
+  max-width: 900px;
+  padding: 10px;
+  padding-top: 20px;
+}
+
+
+
+button {
+  background-color: #59ace0;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+  overFlow: hidden;
+  cursor: pointer;
+}
+
+.deactivated{
+  background-color: #aaa;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+  overFlow: hidden;
+}
+.activated{
+  background-color:  #59ace0;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+  overFlow: hidden;
+  cursor: pointer;
+}
+
+
+#block_container
+{
+    text-align:left;
+    width: 700px;
+}
+#bloc1, #bloc2
+{
+    display:inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+img{
+  margin: 5px;
+}
+
+
+</style>
+<script type="text/javascript">
+    function agreement()
+    {
+      if(document.getElementById("agree").checked)
+       { document.getElementById("begin").setAttribute("onclick","location.href='settings.html'");
+      document.getElementById("begin").setAttribute("class","activated");}
+      else
+        {document.getElementById("begin").setAttribute("onclick","");
+        document.getElementById("begin").setAttribute("class","deactivated");}
+    }
+</script>
+
+<body>
+  <h1 id="title"></h1>
+<div id="form-outer">
+  <h3 id="description"><b>
+     Features </b>
+  </h3>
+  <hr width="70%" style="border: 1px solid#D3D3D3;">
+
+<div style="margin: auto;width: 540px">
+    <div id="block_container">
+      <div id="bloc1"><img src="icons/graph.png"></img></div>
+      <div id="bloc2"><h4>Quantitative Analysis</h4><p>Statistical view of user's eye blinks while using the system</p></div>
+    </div>
+
+
+    <div id="block_container">
+      <div id="bloc1"> <img src="icons/eye.png"></img></div>
+      <div id="bloc2"><h4>Notification Driven</h4>
+
+          <p>Eye strain can be remedied with a helpful trick called the 20-20-20 rule</p>
+        </div>
+
+    </div>
+    <div id="block_container">
+      <div id="bloc1"> <img src="icons/comp.png"></img></div>
+      <div id="bloc2"> <h4>Platform Independent</h4>
+          <p>Runs seamlessly on macOS, Windows and Linux</p></div>
+    </div>
+
+</div>
+
+
+
+<hr width="70%" style="border: 1px solid#D3D3D3;">
+
+
+
+
+  <label>
+    <input id="agree" value="1" type="checkbox" class="userRatings" onchange="agreement()">Always allow Camera when application runs
+  </label>
+
+
+
+ <hr width="70%" style="border: 1px solid#D3D3D3;">
+
+
+<div class="algn">
+     <button id="back" onclick="location.href='index.html'">Back</button>
+   <button  id="begin" class="deactivated" onclick="" >Let's Begin!</button>
+</div>
+
+</div>
+</body>
