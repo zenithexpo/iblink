@@ -25,7 +25,7 @@ The application also provides a feature to completely turn off notifications, so
 
 * Step 1:
 Clone this repo into your system <br/>
-` git clone https://github.com/shubham99bisht/iblink.git ` <br/>
+` git clone https://github.com/zenithexpo/iblink.git ` <br/>
 
 * Step 2:
 Download the **shape_predictor_68_face_landmarks.dat**
@@ -54,8 +54,8 @@ P.S. : Thank you Akshay for amazing projects :)
 ## Demo
 
 **Running Demo**<br/>
-![alt_text](https://github.com/shubham99bisht/iblink/blob/master/samples/demo1a.gif)
+![alt_text](https://github.com/zenithexpo/iblink/blob/master/samples/demo1a.gif)
 <br/><br/>
 
 **Notifications are generated even when the app is minized**<br/>
-![alt](https://github.com/shubham99bisht/iblink/blob/master/samples/demo2.png)
+![alt](https://github.com/zenithexpo/iblink/blob/master/samples/demo2.png)
