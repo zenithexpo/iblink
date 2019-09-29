@@ -58,4 +58,4 @@ P.S. : Thank you Akshay for amazing projects :)
 <br/><br/>
 
 **Notifications are generated even when the app is minized**<br/>
-![alt](https://github.com/zenithexpo/iblink/blob/master/samples/demo2.png)
+![alt](https://github.com/zenithexpo/iblink/blob/master/samples/Screenshot from 2019-09-26 23-17-52.png)
